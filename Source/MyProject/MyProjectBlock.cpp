@@ -4,6 +4,7 @@
 #include "MyProjectBlock.h"
 #include "MyProjectBlockGrid.h"
 
+std::vector<AMyProjectBlock*> AMyProjectBlock::A_Blocks;
 AMyProjectBlock::AMyProjectBlock()
 {
 	// Structure to hold one-time initialization
@@ -13,7 +14,7 @@ AMyProjectBlock::AMyProjectBlock()
 		ConstructorHelpers::FObjectFinderOptional<UMaterialInstance> BlueMaterial;
 		ConstructorHelpers::FObjectFinderOptional<UMaterialInstance> OrangeMaterial;
 		FConstructorStatics()
-			: PlaneMesh(TEXT("/Game/Puzzle/Meshes/PuzzleCube.PuzzleCube"))
+			: PlaneMesh(TEXT("/Game/Assets/Meshes/SM_Cell.SM_Cell"))
 			, BlueMaterial(TEXT("/Game/Puzzle/Meshes/BlueMaterial.BlueMaterial"))
 			, OrangeMaterial(TEXT("/Game/Puzzle/Meshes/OrangeMaterial.OrangeMaterial"))
 		{
@@ -28,8 +29,8 @@ AMyProjectBlock::AMyProjectBlock()
 	// Create static mesh component
 	BlockMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BlockMesh0"));
 	BlockMesh->SetStaticMesh(ConstructorStatics.PlaneMesh.Get());
-	BlockMesh->SetRelativeScale3D(FVector(1.f,1.f,0.25f));
-	BlockMesh->SetRelativeLocation(FVector(0.f,0.f,25.f));
+	//BlockMesh->SetRelativeScale3D(FVector(1.f,1.f,0.25f));
+	//BlockMesh->SetRelativeLocation(FVector(0.f,0.f,25.f));
 	BlockMesh->SetMaterial(0, StartMaterial);
 	BlockMesh->SetupAttachment(DummyRoot);
 	BlockMesh->OnClicked.AddDynamic(this, &AMyProjectBlock::BlockClicked);
@@ -37,6 +38,8 @@ AMyProjectBlock::AMyProjectBlock()
 	
 	// Save a pointer to the orange material
 	OrangeMaterial = ConstructorStatics.OrangeMaterial.Get();
+	//A_Blocks.add(this);
+	A_Blocks.push_back(this);
 }
 
 void AMyProjectBlock::BlockClicked(UPrimitiveComponent* ClickedComp, FKey ButtonClicked)

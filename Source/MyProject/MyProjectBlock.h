@@ -1,6 +1,7 @@
 // Copyright 1998-2016 Epic Games, Inc. All Rights Reserved.
 #pragma once
 #include "GameFramework/Actor.h"
+#include <vector>
 #include "MyProjectBlock.generated.h"
 
 /** A block that can be clicked */
@@ -41,6 +42,8 @@ public:
 	UFUNCTION()
 	void OnFingerPressedBlock(ETouchIndex::Type FingerIndex, UPrimitiveComponent* TouchedComponent);
 
+	static std::vector<AMyProjectBlock*> A_Blocks;
+	//static TArray<AMyProjectBlock*> A_Blocks;
 public:
 	/** Returns DummyRoot subobject **/
 	FORCEINLINE class USceneComponent* GetDummyRoot() const { return DummyRoot; }
