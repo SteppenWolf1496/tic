@@ -40,6 +40,7 @@ AMyProjectBlock::AMyProjectBlock()
 	OrangeMaterial = ConstructorStatics.OrangeMaterial.Get();
 	//A_Blocks.add(this);
 	A_Blocks.push_back(this);
+	
 }
 
 void AMyProjectBlock::BlockClicked(UPrimitiveComponent* ClickedComp, FKey ButtonClicked)

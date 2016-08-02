@@ -33,7 +33,7 @@ void AMyProjectBlockGrid::BeginPlay()
 	Super::BeginPlay();
 	
 	for	(int i=0;i<AMyProjectBlock::A_Blocks.size();++i){
-
+		AMyProjectBlock::A_Blocks[i]->OwningGrid = this;
 	}
 
 
