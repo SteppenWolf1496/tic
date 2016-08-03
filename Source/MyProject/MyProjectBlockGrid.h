@@ -14,8 +14,8 @@ class AMyProjectBlockGrid : public AActor
 	class USceneComponent* DummyRoot;
 
 	/** Text component for the score */
-	UPROPERTY(Category = Grid, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-	class UTextRenderComponent* ScoreText;
+	//UPROPERTY(Category = Grid, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	//class UTextRenderComponent* ScoreText;
 
 public:
 	AMyProjectBlockGrid();
@@ -42,7 +42,7 @@ public:
 	/** Returns DummyRoot subobject **/
 	FORCEINLINE class USceneComponent* GetDummyRoot() const { return DummyRoot; }
 	/** Returns ScoreText subobject **/
-	FORCEINLINE class UTextRenderComponent* GetScoreText() const { return ScoreText; }
+	//FORCEINLINE class UTextRenderComponent* GetScoreText() const { return ScoreText; }
 };
 
 
