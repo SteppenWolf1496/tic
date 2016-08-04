@@ -43,7 +43,7 @@ public:
 	void OnFingerPressedBlock(ETouchIndex::Type FingerIndex, UPrimitiveComponent* TouchedComponent);
 
 	static std::vector<AMyProjectBlock*> A_Blocks;
-	//static TArray<AMyProjectBlock*> A_Blocks;
+	
 public:
 	/** Returns DummyRoot subobject **/
 	FORCEINLINE class USceneComponent* GetDummyRoot() const { return DummyRoot; }
