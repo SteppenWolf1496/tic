@@ -35,9 +35,10 @@ public:
 	virtual void BeginPlay() override;
 	// End AActor interface
 
-	/** Handle the block being clicked */
-	void AddScore();
+	
 
+	/**User make move*/
+	public void MakedMove(MyProjectBlock* _block);
 public:
 	/** Returns DummyRoot subobject **/
 	FORCEINLINE class USceneComponent* GetDummyRoot() const { return DummyRoot; }

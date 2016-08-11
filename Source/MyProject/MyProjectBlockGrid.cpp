@@ -23,15 +23,14 @@ AMyProjectBlockGrid::AMyProjectBlockGrid()
 	ScoreText->SetupAttachment(DummyRoot);*/
 
 	// Set defaults
-	Size = 3;
-	BlockSpacing = 300.f;
+	//Size = 3;
+	//BlockSpacing = 300.f;
 }
 
 
 void AMyProjectBlockGrid::BeginPlay()
 {
 	Super::BeginPlay();
-	
 	for	(int i=0;i<AMyProjectBlock::A_Blocks.size();++i){
 		AMyProjectBlock::A_Blocks[i]->OwningGrid = this;
 	}
@@ -40,13 +39,9 @@ void AMyProjectBlockGrid::BeginPlay()
 }
 
 
-void AMyProjectBlockGrid::AddScore()
+void AMyProjectBlockGrid::MakedMove(MyProjectBlock* _block)
 {
-	// Increment score
-	Score++;
-
-	// Update text
-	//ScoreText->SetText(FText::Format(LOCTEXT("ScoreFmt", "Score: {0}"), FText::AsNumber(Score)));
+	
 }
 
 #undef LOCTEXT_NAMESPACE

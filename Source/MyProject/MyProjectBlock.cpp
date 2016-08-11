@@ -68,7 +68,7 @@ void AMyProjectBlock::BlockClicked(UPrimitiveComponent* ClickedComp, FKey Button
 		// Tell the Grid
 		if (OwningGrid != NULL)
 		{
-			OwningGrid->AddScore();
+			//OwningGrid
 		}
 	}
 }
