@@ -5,6 +5,7 @@
 #include "MyProjectBlockGrid.h"
 
 std::vector<AMyProjectBlock*> AMyProjectBlock::A_Blocks;
+
 AMyProjectBlock::AMyProjectBlock()
 {
 	// Structure to hold one-time initialization
@@ -40,7 +41,52 @@ AMyProjectBlock::AMyProjectBlock()
 	OrangeMaterial = ConstructorStatics.OrangeMaterial.Get();
 	//A_Blocks.add(this);
 	A_Blocks.push_back(this);
+
 	
+	
+
+
+
+	/*for (int32 BlockIndex = 0; BlockIndex<NumBlocks; BlockIndex++)
+	{
+		
+
+																// Make postion vector, offset from Grid location
+		const FVector BlockLocation = FVector(XOffset, YOffset, 0.f) + GetActorLocation();
+
+		// Spawn a block
+		AMyProjectBlock* NewBlock = GetWorld()->SpawnActor<AMyProjectBlock>(BlockLocation, FRotator(0, 0, 0));
+
+		// Tell the block about its owner
+		if (NewBlock != NULL)
+		{
+			NewBlock->OwningGrid = this;
+		}
+	}*/
+	
+}
+
+void AMyProjectBlock::BeginPlay()
+{
+	Super::BeginPlay();
+
+	ASubBlock* tmpSB;
+	float XOffset; // Divide by dimension
+	float YOffset; // Modulo gives remainder
+	for (int i = 0; i < 9; i++)
+	{
+		XOffset = (i / 3) * 70 - 70; // Divide by dimension
+		YOffset = (i % 3) * 70 - 70; // Modulo gives remainder
+
+								// Make postion vector, offset from Grid location
+		const FVector BlockLocation = FVector(XOffset, YOffset, 0.f) + GetActorLocation();
+
+		tmpSB = GetWorld()->SpawnActor<ASubBlock>(BlockLocation, FRotator(0, 0, 0));
+		//GetWorld()->spaw
+		//tmpSMC->SetStaticMesh(ConstructorStatics.PlaneMesh.Get());
+
+	}
+
 }
 
 void AMyProjectBlock::BlockClicked(UPrimitiveComponent* ClickedComp, FKey ButtonClicked)
@@ -56,7 +102,10 @@ void AMyProjectBlock::BlockClicked(UPrimitiveComponent* ClickedComp, FKey Button
 		// Tell the Grid
 		if(OwningGrid != NULL)
 		{
-			OwningGrid->AddScore();
+			//OwningGrid->
+			OwningGrid->MakedMove(this);
+
+			//OwningGrid->AddScore();
 		}
 	}
 	else {
@@ -64,13 +113,15 @@ void AMyProjectBlock::BlockClicked(UPrimitiveComponent* ClickedComp, FKey Button
 
 		// Change material
 		BlockMesh->SetMaterial(0, StartMaterial);
-
-		// Tell the Grid
-		if (OwningGrid != NULL)
-		{
-			//OwningGrid
-		}
 	}
+}
+
+
+
+
+int AMyProjectBlock::GetIndexWithMove(int _i, int _move)
+{
+	return _i - _move;
 }
 
 

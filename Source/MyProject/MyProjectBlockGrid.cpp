@@ -8,6 +8,7 @@
 
 #define LOCTEXT_NAMESPACE "PuzzleBlockGrid"
 
+int AMyProjectBlockGrid::ClickCounter = 0;
 
 AMyProjectBlockGrid::AMyProjectBlockGrid()
 {
@@ -39,9 +40,14 @@ void AMyProjectBlockGrid::BeginPlay()
 }
 
 
-void AMyProjectBlockGrid::MakedMove(MyProjectBlock* _block)
+void AMyProjectBlockGrid::MakedMove(AMyProjectBlock* _block)
 {
 	
+}
+
+std::vector<int> AMyProjectBlockGrid::GetIsWin()
+{
+	return std::vector<int>();
 }
 
 #undef LOCTEXT_NAMESPACE

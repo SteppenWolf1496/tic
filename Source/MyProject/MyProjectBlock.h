@@ -1,6 +1,7 @@
 // Copyright 1998-2016 Epic Games, Inc. All Rights Reserved.
 #pragma once
 #include "GameFramework/Actor.h"
+#include "SubBlock.h"
 #include <vector>
 #include "MyProjectBlock.generated.h"
 
@@ -20,8 +21,17 @@ class AMyProjectBlock : public AActor
 
 	UMaterialInstance* StartMaterial;
 
+	
+	
+	std::vector<ASubBlock*> insideCubes;
+
+	int GetIndexWithMove(int _i, int _move);
+
 public:
 	AMyProjectBlock();
+
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
 
 	/** Are we currently active? */
 	bool bIsActive;

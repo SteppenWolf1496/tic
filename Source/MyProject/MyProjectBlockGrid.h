@@ -1,6 +1,9 @@
 // Copyright 1998-2016 Epic Games, Inc. All Rights Reserved.
 #pragma once
+//
 #include "GameFramework/Actor.h"
+#include <vector>
+#include "MyProjectBlock.h"
 #include "MyProjectBlockGrid.generated.h"
 
 /** Class used to spawn blocks and manage score */
@@ -23,6 +26,8 @@ public:
 	/** How many blocks have been clicked */
 	int32 Score;
 
+	static int ClickCounter;
+
 	/** Number of blocks along each side of grid */
 	UPROPERTY(Category=Grid, EditAnywhere, BlueprintReadOnly)
 	int32 Size;
@@ -37,13 +42,17 @@ public:
 
 	
 
-	/**User make move*/
-	public void MakedMove(MyProjectBlock* _block);
+	
 public:
+
+	/**User make move*/
+	void MakedMove(AMyProjectBlock* _block);
 	/** Returns DummyRoot subobject **/
 	FORCEINLINE class USceneComponent* GetDummyRoot() const { return DummyRoot; }
 	/** Returns ScoreText subobject **/
 	//FORCEINLINE class UTextRenderComponent* GetScoreText() const { return ScoreText; }
+
+	std::vector<int> GetIsWin();
 };
 
 
