@@ -16,14 +16,14 @@ ASubBlock::ASubBlock()
 		ConstructorHelpers::FObjectFinderOptional<UMaterialInstance> CobbleMaterial;
 		FConstructorStatics()
 			: MainBox(TEXT("/Game/Assets/Meshes/SM_MCC_Rock.SM_MCC_Rock"))
-			, IronOreMaterial(TEXT("/Game/Assets/Materials/M_MCIronOre.M_MCIronOre"))
-			, CobbleMaterial(TEXT("/Game/Assets/Materials/M_MCCobble.M_MCCobble"))
+			, IronOreMaterial(TEXT("/Game/Assets/Materials/M_MCIronOre_Inst.M_MCIronOre_Inst"))
+			, CobbleMaterial(TEXT("/Game/Assets/Materials/M_MCCobble_Inst.M_MCCobble_Inst"))
 		{
 		}
 	};
 	static FConstructorStatics ConstructorStatics;
 
-
+	
 
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
@@ -38,6 +38,8 @@ ASubBlock::ASubBlock()
 	//BlockMesh->SetMaterial(0, ConstructorStatics.IronOreMaterial.Get());
 	BlockMesh->SetupAttachment(DummyRoot);
 	
+	MCross = ConstructorStatics.CobbleMaterial.Get();
+	MZero = ConstructorStatics.IronOreMaterial.Get();
 
 }
 

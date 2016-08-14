@@ -26,6 +26,10 @@ class AMyProjectBlock : public AActor
 	std::vector<ASubBlock*> insideCubes;
 
 	int GetIndexWithMove(int _i, int _move);
+	ASubBlock* subBlocks[9];
+
+	static int crossMatrix[9];
+	static int zeroMatrix [9];
 
 public:
 	AMyProjectBlock();
@@ -54,11 +58,14 @@ public:
 
 	static std::vector<AMyProjectBlock*> A_Blocks;
 	
-public:
 	/** Returns DummyRoot subobject **/
 	FORCEINLINE class USceneComponent* GetDummyRoot() const { return DummyRoot; }
 	/** Returns BlockMesh subobject **/
 	FORCEINLINE class UStaticMeshComponent* GetBlockMesh() const { return BlockMesh; }
+
+
+	void MakeZero();
+	void MakeCross();
 };
 
 

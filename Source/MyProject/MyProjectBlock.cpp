@@ -5,6 +5,41 @@
 #include "MyProjectBlockGrid.h"
 
 std::vector<AMyProjectBlock*> AMyProjectBlock::A_Blocks;
+int AMyProjectBlock::crossMatrix[9] = { 1,0,1,0,1,0,1,0,1 };
+int AMyProjectBlock::zeroMatrix[9] = { 1,1,1,1,0,1,1,1,1 };
+
+
+void AMyProjectBlock::MakeZero()
+{
+	for (int i = 0; i < 9; ++i) {
+		if (!zeroMatrix[i])
+		{
+			subBlocks[i]->SetActorHiddenInGame(true);
+		}
+		else {
+			subBlocks[i]->BlockMesh->SetMaterial(0,subBlocks[i]->MZero);
+		}
+		
+	}
+}
+
+
+
+void AMyProjectBlock::MakeCross()
+{
+	for (int i = 0; i < 9; ++i) {
+		if (!crossMatrix[i])
+		{
+			subBlocks[i]->SetActorHiddenInGame(true);
+		}
+		else {
+			subBlocks[i]->BlockMesh->SetMaterial(0, subBlocks[i]->MCross);
+		}
+	}
+}
+
+
+
 
 AMyProjectBlock::AMyProjectBlock()
 {
@@ -36,7 +71,7 @@ AMyProjectBlock::AMyProjectBlock()
 	BlockMesh->SetupAttachment(DummyRoot);
 	BlockMesh->OnClicked.AddDynamic(this, &AMyProjectBlock::BlockClicked);
 	BlockMesh->OnInputTouchBegin.AddDynamic(this, &AMyProjectBlock::OnFingerPressedBlock);
-	
+	//BlockMesh->bVisible = false;
 	// Save a pointer to the orange material
 	OrangeMaterial = ConstructorStatics.OrangeMaterial.Get();
 	//A_Blocks.add(this);
@@ -80,8 +115,11 @@ void AMyProjectBlock::BeginPlay()
 
 								// Make postion vector, offset from Grid location
 		const FVector BlockLocation = FVector(XOffset, YOffset, 0.f) + GetActorLocation();
-
+		
+		
 		tmpSB = GetWorld()->SpawnActor<ASubBlock>(BlockLocation, FRotator(0, 0, 0));
+		tmpSB->Num = i;
+		subBlocks[i] = tmpSB;
 		//GetWorld()->spaw
 		//tmpSMC->SetStaticMesh(ConstructorStatics.PlaneMesh.Get());
 
@@ -107,6 +145,14 @@ void AMyProjectBlock::BlockClicked(UPrimitiveComponent* ClickedComp, FKey Button
 
 			//OwningGrid->AddScore();
 		}
+
+		if (AMyProjectBlockGrid::ClickCounter % 2) {
+			MakeCross();
+		}
+		else {
+			MakeZero();
+		}
+		AMyProjectBlockGrid::ClickCounter++;
 	}
 	else {
 		bIsActive = false;

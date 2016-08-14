@@ -13,16 +13,19 @@ class MYPROJECT_API ASubBlock : public AActor
 		UPROPERTY(Category = Block, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 		class USceneComponent* DummyRoot;
 
-	/** StaticMesh component for the clickable block */
-	UPROPERTY(Category = Block, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-		class UStaticMeshComponent* BlockMesh;
-
-
 	
+		
 
 public:
 	// Sets default values for this actor's properties
 	ASubBlock();
+	/** StaticMesh component for the clickable block */
+	UPROPERTY(Category = Block, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	class UStaticMeshComponent* BlockMesh;
+	UMaterialInstance* MCross;
+	UMaterialInstance* MZero;
+	//Number in Array
+	int Num;
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
