@@ -9,7 +9,7 @@ class MYPROJECT_API GameEnums
 {
 public:
 
-	static enum GameState
+	static enum MyGameState
 	{
 		PlayerMove,
 		AIMove,

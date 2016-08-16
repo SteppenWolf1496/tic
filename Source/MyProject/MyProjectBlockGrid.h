@@ -40,7 +40,7 @@ public:
 	virtual void BeginPlay() override;
 	// End AActor interface
 
-	
+	static int winlogics[8][3];
 
 	
 public:
@@ -53,6 +53,9 @@ public:
 	//FORCEINLINE class UTextRenderComponent* GetScoreText() const { return ScoreText; }
 
 	std::vector<int> GetIsWin();
+
+	//-1 - player win, 1 - AI Win, 2 - Drow
+	int CheckWin();
 };
 
 
