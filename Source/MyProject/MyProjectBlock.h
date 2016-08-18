@@ -2,6 +2,7 @@
 #pragma once
 #include "GameFramework/Actor.h"
 #include "SubBlock.h"
+#include "GameEnums.h"
 #include <vector>
 #include "MyProjectBlock.generated.h"
 
@@ -30,6 +31,8 @@ class AMyProjectBlock : public AActor
 
 	static int crossMatrix[9];
 	static int zeroMatrix [9];
+	
+	GameEnums::BlockState myState;
 
 public:
 	AMyProjectBlock();
@@ -37,8 +40,7 @@ public:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	/** Are we currently active? */
-	bool bIsActive;
+	
 
 	/** Pointer to orange material used on active blocks */
 	UPROPERTY()
@@ -66,6 +68,12 @@ public:
 
 	void MakeZero();
 	void MakeCross();
+
+	void Reset();
+
+	void SetBlockState(GameEnums::BlockState _state);
+
+	GameEnums::BlockState GetBlockState();
 };
 
 

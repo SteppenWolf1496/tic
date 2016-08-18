@@ -8,13 +8,9 @@ class MYPROJECT_API ASubBlock : public AActor
 {
 	GENERATED_BODY()
 
-
-		/** Dummy root component */
-		UPROPERTY(Category = Block, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-		class USceneComponent* DummyRoot;
-
-	
-		
+	/** Dummy root component */
+	UPROPERTY(Category = Block, VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	class USceneComponent* DummyRoot;
 
 public:
 	// Sets default values for this actor's properties

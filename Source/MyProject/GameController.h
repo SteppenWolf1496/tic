@@ -10,13 +10,14 @@ class MYPROJECT_API GameController
 //public:
 	GameController();
 	~GameController();
-	GameController* instance = nullptr;
+	static GameController* instance;
 	GameEnums::MyGameState gameState;
 	GameEnums::ApplicationState appState;
 
 
 public:
-	GameController* Instance();
-
+	static GameController* Instance();
+	const GameEnums::MyGameState GetGameState();
+	void SetGameState(GameEnums::MyGameState _gameState);
 	void Update();
 };

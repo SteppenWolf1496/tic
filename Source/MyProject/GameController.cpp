@@ -4,6 +4,8 @@
 #include "GameController.h"
 #include "AI.h"
 
+GameController* GameController::instance = nullptr;
+
 GameController::GameController()
 {
 	appState = GameEnums::ApplicationState::InGame;
@@ -18,6 +20,16 @@ GameController * GameController::Instance()
 {
 	if (instance == nullptr) instance = new GameController();
 	return instance;
+}
+
+GameEnums::MyGameState GameController::GetGameState()
+{
+	return gameState;
+}
+
+void GameController::SetGameState(GameEnums::MyGameState _gameState)
+{
+	gameState = _gameState;
 }
 
 void GameController::Update()

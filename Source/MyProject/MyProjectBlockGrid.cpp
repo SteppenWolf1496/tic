@@ -3,12 +3,12 @@
 #include "MyProject.h"
 #include "MyProjectBlockGrid.h"
 #include "MyProjectBlock.h"
+#include "GameController.h"
+#include "GameEnums.h"
 
 #include "Components/TextRenderComponent.h"
 
 #define LOCTEXT_NAMESPACE "PuzzleBlockGrid"
-
-int AMyProjectBlockGrid::ClickCounter = 0;
 
 
 // 0 1 2
@@ -50,7 +50,11 @@ void AMyProjectBlockGrid::BeginPlay()
 
 void AMyProjectBlockGrid::MakedMove(AMyProjectBlock* _block)
 {
-	
+	if (GameController::Instance()->GetGameState() == GameEnums::MyGameState::PlayerMove) {
+		GameController::Instance()->SetGameState = GameEnums::MyGameState::AIMove;
+
+
+	}
 }
 
 std::vector<int> AMyProjectBlockGrid::GetIsWin()
@@ -61,6 +65,16 @@ std::vector<int> AMyProjectBlockGrid::GetIsWin()
 int AMyProjectBlockGrid::CheckWin()
 {
 	return 0;
+}
+
+std::vector<int> AMyProjectBlockGrid::GetBoardDataForAI()
+{
+	std::vector<int> ret = std::vector<int>(9);
+	/*for (int i = 0; i<AMyProjectBlock::A_Blocks.size(); ++i) {
+		ret[i] = 
+	}*/
+
+	return ret;
 }
 
 #undef LOCTEXT_NAMESPACE

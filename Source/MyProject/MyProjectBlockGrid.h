@@ -26,7 +26,7 @@ public:
 	/** How many blocks have been clicked */
 	int32 Score;
 
-	static int ClickCounter;
+	
 
 	/** Number of blocks along each side of grid */
 	UPROPERTY(Category=Grid, EditAnywhere, BlueprintReadOnly)
@@ -56,6 +56,8 @@ public:
 
 	//-1 - player win, 1 - AI Win, 2 - Drow
 	int CheckWin();
+
+	std::vector<int> GetBoardDataForAI();
 };
 
 

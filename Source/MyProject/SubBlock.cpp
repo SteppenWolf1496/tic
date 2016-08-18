@@ -23,8 +23,6 @@ ASubBlock::ASubBlock()
 	};
 	static FConstructorStatics ConstructorStatics;
 
-	
-
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
@@ -49,7 +47,6 @@ ASubBlock::ASubBlock()
 void ASubBlock::BeginPlay()
 {
 	Super::BeginPlay();
-
 }
 
 // Called every frame

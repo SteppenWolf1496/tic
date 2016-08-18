@@ -28,6 +28,13 @@ public:
 		
 	};
 
+	static enum BlockState
+	{
+		Empty,
+		Cross,
+		Zero
+	};
+
 	GameEnums();
 	~GameEnums();
 };

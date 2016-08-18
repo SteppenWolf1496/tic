@@ -3,6 +3,7 @@
 #include "MyProject.h"
 #include "MyProjectBlock.h"
 #include "MyProjectBlockGrid.h"
+#include "GameController.h"
 
 std::vector<AMyProjectBlock*> AMyProjectBlock::A_Blocks;
 int AMyProjectBlock::crossMatrix[9] = { 1,0,1,0,1,0,1,0,1 };
@@ -36,6 +37,22 @@ void AMyProjectBlock::MakeCross()
 			subBlocks[i]->BlockMesh->SetMaterial(0, subBlocks[i]->MCross);
 		}
 	}
+}
+
+void AMyProjectBlock::Reset()
+{
+
+	myState = GameEnums::BlockState::Empty;
+}
+
+void AMyProjectBlock::SetBlockState(GameEnums::BlockState _state)
+{
+	myState = _state;
+}
+
+GameEnums::BlockState AMyProjectBlock::GetBlockState()
+{
+	return myState;
 }
 
 
@@ -75,30 +92,10 @@ AMyProjectBlock::AMyProjectBlock()
 	// Save a pointer to the orange material
 	OrangeMaterial = ConstructorStatics.OrangeMaterial.Get();
 	//A_Blocks.add(this);
+
 	A_Blocks.push_back(this);
-
-	
-	
-
-
-
-	/*for (int32 BlockIndex = 0; BlockIndex<NumBlocks; BlockIndex++)
-	{
+	myState = GameEnums::BlockState::Empty;
 		
-
-																// Make postion vector, offset from Grid location
-		const FVector BlockLocation = FVector(XOffset, YOffset, 0.f) + GetActorLocation();
-
-		// Spawn a block
-		AMyProjectBlock* NewBlock = GetWorld()->SpawnActor<AMyProjectBlock>(BlockLocation, FRotator(0, 0, 0));
-
-		// Tell the block about its owner
-		if (NewBlock != NULL)
-		{
-			NewBlock->OwningGrid = this;
-		}
-	}*/
-	
 }
 
 void AMyProjectBlock::BeginPlay()
@@ -129,37 +126,26 @@ void AMyProjectBlock::BeginPlay()
 
 void AMyProjectBlock::BlockClicked(UPrimitiveComponent* ClickedComp, FKey ButtonClicked)
 {
-	// Check we are not already active
-	if(!bIsActive)
-	{
-		bIsActive = true;
 
-		// Change material
-		BlockMesh->SetMaterial(0, OrangeMaterial);
+	if (GameController::Instance()->GetGameState() != GameEnums::MyGameState::PlayerMove) return;
+
+	
+	// Check we are not already active
+	if(GetBlockState() == GameEnums::BlockState::Empty)
+	{
+		
+		SetBlockState(GameEnums::BlockState::Cross);
+
+		//Draw Cross
+		MakeCross();
 
 		// Tell the Grid
-		if(OwningGrid != NULL)
+		if (OwningGrid != NULL)
 		{
-			//OwningGrid->
 			OwningGrid->MakedMove(this);
-
-			//OwningGrid->AddScore();
 		}
-
-		if (AMyProjectBlockGrid::ClickCounter % 2) {
-			MakeCross();
-		}
-		else {
-			MakeZero();
-		}
-		AMyProjectBlockGrid::ClickCounter++;
 	}
-	else {
-		bIsActive = false;
-
-		// Change material
-		BlockMesh->SetMaterial(0, StartMaterial);
-	}
+	
 }
 
 
